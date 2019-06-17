@@ -1,10 +1,15 @@
-import { ApiMethod, request, everythingEndPoint, Sources } from "./BaseService";
+import { ApiMethod, request, Sources, endpoint, apiKey } from "./BaseService";
 
 export default class NewsService {
 
     getAllNews(callback) {
-        request(everythingEndPoint, ApiMethod.get, [], function (res, err) {
+        const params = {
+            country: "us",
+            apiKey: apiKey,
+        };
+        request(endpoint.top, ApiMethod.get, params, function (res, err) {
             if (err != null) {
+                console.log(err);
                 callback(null, err);
                 return;
             }
@@ -12,8 +17,13 @@ export default class NewsService {
         });
     }
 
-    getSportNews(callback) {
-        request(`${everythingEndPoint}&q=${Sources.sport}`, ApiMethod.get, [], function (res, err) {
+    getNewsWith(sources, callback) {
+        const params = {
+            country: "us",
+            q: sources,
+            apiKey: apiKey,
+        };
+        request(endpoint.everything, ApiMethod.get, params, function (res, err) {
             if (err != null) {
                 callback(null, err);
                 return;
@@ -21,24 +31,4 @@ export default class NewsService {
             callback(res.data, err);
         });
     }
-
-    getTechNews(callback) {
-        request(`${everythingEndPoint}&q=${Sources.technology}`, ApiMethod.get, [], function (res, err) {
-            if (err != null) {
-                callback(null, err);
-                return;
-            }
-            callback(res.data, err);
-        });
-    }
-    getScienceNews(callback) {
-        request(`${everythingEndPoint}&q=${Sources.science}`, ApiMethod.get, [], function (res, err) {
-            if (err != null) {
-                callback(null, err);
-                return;
-            }
-            callback(res.data, err);
-        });
-    }
-
 }

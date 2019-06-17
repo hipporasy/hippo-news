@@ -1,16 +1,15 @@
 
 import Card from "../components/Card";
-import { routes } from "../constants/routes";
+import NewsService from "../services/NewsService";
 
-function Home() {
+function Home({ news }) {
+    
+    console.log(news);
     return <div className="Container">
         <Card style={{ marginTop: 10 }} />
-
+        
         <div style={{ marginTop: 10 }} className="FlexWrapped">
-            <Card className="Cell" />
-            <Card className="Cell" />
-            <Card className="Cell" />
-            <Card className="Cell" />
+        
         </div>
 
         <style global jsx>{`
@@ -33,5 +32,14 @@ function Home() {
         </style>
     </div>;
 }
+
+Home.getInitialProps = async ({ news }) => {
+    var newsService = new NewsService();
+    newsService.getAllNews(function (news, error) {
+        console.log(news)
+        console.log("=asdf=asdf=" + error)
+        return {news: news}
+    })
+  };
 
 export default Home;
