@@ -1,34 +1,30 @@
-import { ApiMethod, request, Sources, endpoint, apiKey } from "./BaseService";
+import { ApiMethod, get, Sources, endpoint, apiKey } from "./BaseService";
 
 export default class NewsService {
 
-    getAllNews(callback) {
+    async getAllNews() {
         const params = {
             country: "us",
             apiKey: apiKey,
         };
-        request(endpoint.top, ApiMethod.get, params, function (res, err) {
-            if (err != null) {
-                console.log(err);
-                callback(null, err);
-                return;
-            }
-            callback(res.data, err);
-        });
+        const res = get(endpoint.top, params);
+        return res.then((res) => {
+            return res.data;
+        }).catch((err) => {
+            return err;
+        })
     }
 
-    getNewsWith(sources, callback) {
+    async getNewsWith(sources) {
         const params = {
-            country: "us",
             q: sources,
             apiKey: apiKey,
         };
-        request(endpoint.everything, ApiMethod.get, params, function (res, err) {
-            if (err != null) {
-                callback(null, err);
-                return;
-            }
-            callback(res.data, err);
-        });
+        const res = get(endpoint.everything, params);
+        return res.then((res) => {
+            return res.data;
+        }).catch((err) => {
+            return err;
+        })
     }
 }

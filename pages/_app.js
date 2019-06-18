@@ -14,6 +14,17 @@ export default class extends App {
                 body {
                     margin: 0;
                 }
+                .Container {
+                    margin: 0 auto;
+                    width: 90%
+                }
+                .GridContainer {
+                    grid-gap: 50px;
+                    height: 90vh;
+                    margin: 1rem;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr;                
+                }
                 `}
             </style>
         </Container>

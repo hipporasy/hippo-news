@@ -4,7 +4,7 @@ const Header = (props) => {
 
   const { routes } = props;
   return (<div className="topnav">
-    <a href="/" style={{ height:"40",float: "left", marginLeft: "10%", marginTop: 10, padding:"0!important" }}>
+    <a href="/" style={{ height: "40", float: "left", marginLeft: "10%", marginTop: 10, padding: "0!important" }}>
       <img
         height="40"
         src="../static/white_logo.png"
